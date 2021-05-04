@@ -39,7 +39,7 @@ class Loan extends CI_Model {
                    CONCAT(approver.first_name, ' ', approver.last_name) as approver_name,
                    IF (
                         l.loan_type_id = 0,
-                        CONCAT(lote.desarrollo, ' SM ', lote.sm, ' lote ', lote.lote),
+                        CONCAT(lote.desarrollo,  lote.sm,  lote.lote),
                         lt.name
                    ) AS loan_type";
 
