@@ -291,7 +291,7 @@ class Lote extends CI_Model {
         //$this->db->join('people', 'lotes.person_id=people.person_id');
         $this->db->where("(desarrollo LIKE '%" . $this->db->escape_like_str($search) . "%'  or 
         sm LIKE '%" . $this->db->escape_like_str($search) . "%' or
-		CONCAT(`desarrollo`,' ',`sm`) LIKE '%" . $this->db->escape_like_str($search) . "%') and deleted=0
+		CONCAT(`desarrollo`,' ',`sm`, ' ', `lote`) LIKE '%" . $this->db->escape_like_str($search) . "%') and deleted=0
                     " . $add_where . "
                     ");
         $this->db->order_by("lote", "desc");
