@@ -90,9 +90,9 @@ class Lotes extends Person_controller {
     {
        
         $lote_data = array(
-            'desarrollo' => $this->input->post('desarrollo') == '' ? null : $this->input->post('desarrollo'),
-            'sm' => $this->input->post('sm') == '' ? 'sin sm' : 'SM '.$this->input->post('sm'),
-            'lote' => $this->input->post('lote') == '' ? 'sin lote' : 'LOTE '.$this->input->post('lote'),
+            'desarrollo' => $this->input->post('desarrollo') == '' ? null : trim($this->input->post('desarrollo')),
+            'sm' => $this->input->post('sm') == '' ? 'sin sm' : 'SM '.trim($this->input->post('sm')),
+            'lote' => $this->input->post('lote') == '' ? 'sin lote' : 'LOTE '.trim($this->input->post('lote')),
             'superficie' => $this->input->post('superficie') == '' ? 1000 : $this->input->post('superficie'),
             'estado' => 'disponible',
             'comentarios' => $this->input->post('comentarios') == '' ? 'sin comentarios' : $this->input->post('comentarios'),
