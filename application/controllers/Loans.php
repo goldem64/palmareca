@@ -227,15 +227,16 @@ class Loans extends Secure_area implements iData_controller {
             'enganche' => $this->input->post('enganche'),
             'mantenimiento' => $this->input->post('mantenimiento'),
             'observacion_lote' => $this->input->post('observacion_lote'),
-            'loan_applied_date' => strtotime($this->input->post('apply_date')),
+            'loan_applied_date' => strtotime($this->reverseDate($this->input->post('apply_date'))),
             'remarks' => $this->input->post('remarks'),
             'loan_agent_id' => $this->input->post('agent'),
             'loan_approved_by_id' => $this->input->post('approver'),
             'loan_status' => ($this->input->post('approver') > 0) ? "approved" : $this->input->post("status"),
             'misc_fees' => json_encode($misc_fees),
             'payment_scheds' => json_encode($payment_scheds),
-        );
 
+        );
+       
         // check loan payment date
         if ($loan_data["loan_type_id"] > 0)
         {
@@ -243,7 +244,7 @@ class Loans extends Secure_area implements iData_controller {
         }
         else
         {
-            $loan_data["loan_payment_date"] = strtotime($pay_breakdowns["schedule"][0]);
+            $loan_data["loan_payment_date"] = strtotime($this->reverseDate($pay_breakdowns["schedule"][0]));
         }
 
         // $guarantee_data = array(
@@ -362,9 +363,9 @@ class Loans extends Secure_area implements iData_controller {
                 ucwords($loan->customer_name),
                 ucwords($loan->agent_name),
                 ucwords($loan->approver_name),
-                date("m/d/Y", $loan->loan_applied_date),
+                date("d/m/Y", $loan->loan_applied_date),
                 get_last_payment_date($loan->loan_id),
-                ($loan->loan_payment_date > 0) ? date("m/d/Y", $loan->loan_payment_date) : '',
+                ($loan->loan_payment_date > 0) ? date("d/m/Y", $loan->loan_payment_date) : '',
                 $this->lang->line("common_" . strtolower($loan_status)),
                 anchor('loans/view/' . $loan->loan_id, $this->lang->line('common_view'), array('class' => 'btn btn-success'))
             );
@@ -1099,6 +1100,14 @@ class Loans extends Secure_area implements iData_controller {
         $data["select_type"] = $select_type;
         $data['attachments'] = $file;
         $this->load->view("loans/attachments", $data);
+    }
+
+    function reverseDate($str) {
+        $newString = "";
+             $newString = substr($str,6,4). "/".substr($str,3,2). "/" .substr($str,0,2);
+        return $newString;
+        //10-04-1090
+    
     }
 
 }

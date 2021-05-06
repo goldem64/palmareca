@@ -308,8 +308,8 @@
                 var balance_owed = (loan_amount - payment_amount ).toFixed(2);
                 total_amount += payment_amount;
                 
-                payment_date = new Date( $("#start_date").val() );
-                fechai = new Date( $("#start_date").val());
+                payment_date = new Date( reverseDate($("#start_date").val()) );
+                fechai = new Date( reverseDate($("#start_date").val()));
                 
                
                 //window.alert("Periodo: " + $("#term_period").val());
@@ -351,8 +351,7 @@
                 
                 
                    
-                         var d_date = (payment_date.getMonth() + 1) + "/" + payment_date.getDate() + "/" + payment_date.getFullYear();
-                        
+                         var d_date = agregarCero(payment_date.getDate()) + "/" + agregarCero((payment_date.getMonth() + 1)) + "/" + payment_date.getFullYear();
                       
                 
                 
@@ -404,6 +403,21 @@
         }
         return x1 + x2;
     }
+
+    function reverseDate(str) {
+    var newString = "";
+         newString = str.substring(6,10) + "/" + str.substring(3,5) + "/" + str.substring(0,2);
+    return newString;
+}
+
+   function agregarCero(str){
+              
+       if (str.toString().length == 1){
+         str = "0" + str;
+
+       }
+       return str;
+   }
 
     function dividir(obj){
         if(obj.checked){

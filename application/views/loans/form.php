@@ -159,7 +159,7 @@
                                                 array(
                                                     'name' => 'apply_date',
                                                     'id' => 'apply_date',
-                                                    'value' => (isset($loan_info->loan_applied_date) && $loan_info->loan_applied_date > 0) ? date("m/d/Y", $loan_info->loan_applied_date) : date("m/d/Y"),
+                                                    'value' => (isset($loan_info->loan_applied_date) && $loan_info->loan_applied_date > 0) ? date("d/m/Y", $loan_info->loan_applied_date) : date("d/m/Y"),
                                                     'class' => 'form-control',
                                                     'type' => 'datetime'
                                                 )
@@ -803,6 +803,7 @@ echo form_close();
             }
             
             $('.input-group.date').datepicker({
+                format: 'dd/mm/yyyy',
                 todayBtn: "linked",
                 keyboardNavigation: false,
                 forceParse: false,
